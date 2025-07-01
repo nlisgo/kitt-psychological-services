@@ -6,25 +6,34 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add click event listeners for smooth scrolling
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
-            e.preventDefault();
-            
             const targetId = this.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
             
-            if (targetSection) {
-                // Calculate offset for fixed header
-                const headerHeight = document.querySelector('.header').offsetHeight;
-                const targetPosition = targetSection.offsetTop - headerHeight - 20;
+            // Check if this is a hash link (starts with #)
+            if (targetId.startsWith('#')) {
+                const targetSection = document.querySelector(targetId);
                 
-                // Smooth scroll to target
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-                
-                // Update active navigation state
-                updateActiveNav(targetId);
+                if (targetSection) {
+                    // Target exists on current page, use smooth scrolling
+                    e.preventDefault();
+                    
+                    // Calculate offset for fixed header
+                    const headerHeight = document.querySelector('.header').offsetHeight;
+                    const targetPosition = targetSection.offsetTop - headerHeight - 20;
+                    
+                    // Smooth scroll to target
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Update active navigation state
+                    updateActiveNav(targetId);
+                } else {
+                    // Target doesn't exist on current page, allow normal navigation
+                    // Don't prevent default, let the browser handle the navigation
+                }
             }
+            // For non-hash links (like index.html#section), allow normal navigation
         });
     });
     
