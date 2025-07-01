@@ -203,92 +203,39 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
     document.head.appendChild(style);
     
-    // Mobile menu toggle (for responsive design)
-    const header = document.querySelector('.header');
-    const nav = document.querySelector('.nav');
+    // Hamburger menu functionality
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('nav-menu');
     
-    // Add mobile menu button
-    const mobileMenuBtn = document.createElement('button');
-    mobileMenuBtn.className = 'mobile-menu-btn';
-    mobileMenuBtn.innerHTML = '☰';
-    mobileMenuBtn.style.cssText = `
-        display: none;
-        background: none;
-        border: none;
-        font-size: 1.5rem;
-        color: var(--text-primary);
-        cursor: pointer;
-        padding: 0.5rem;
-    `;
-    
-    // Insert mobile menu button
-    header.querySelector('.container').appendChild(mobileMenuBtn);
-    
-    // Mobile menu toggle functionality
-    mobileMenuBtn.addEventListener('click', function() {
-        nav.classList.toggle('mobile-nav-open');
-    });
-    
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', function(e) {
-        if (!header.contains(e.target)) {
-            nav.classList.remove('mobile-nav-open');
-        }
-    });
-    
-    // Close mobile menu when clicking nav links
-    navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            nav.classList.remove('mobile-nav-open');
+    if (hamburger && navMenu) {
+        // Toggle mobile menu
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
         });
-    });
-    
-    // Add mobile styles
-    const mobileStyle = document.createElement('style');
-    mobileStyle.textContent = `
-        @media (max-width: 768px) {
-            .mobile-menu-btn {
-                display: block !important;
+        
+        // Close mobile menu when clicking nav links
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
             }
-            
-            .nav {
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: white;
-                box-shadow: 0 4px 20px rgba(107, 155, 214, 0.1);
-                transform: translateY(-100%);
-                opacity: 0;
-                visibility: hidden;
-                transition: all 0.3s ease;
+        });
+        
+        // Close mobile menu on window resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 1120) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
             }
-            
-            .nav.mobile-nav-open {
-                transform: translateY(0);
-                opacity: 1;
-                visibility: visible;
-            }
-            
-            .nav-menu {
-                flex-direction: column;
-                padding: 1rem;
-                gap: 0;
-            }
-            
-            .nav-menu li {
-                border-bottom: 1px solid var(--border-color);
-            }
-            
-            .nav-menu li:last-child {
-                border-bottom: none;
-            }
-            
-            .nav-link {
-                display: block;
-                padding: 1rem;
-            }
-        }
-    `;
-    document.head.appendChild(mobileStyle);
+        });
+    }
 });

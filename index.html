@@ -11,12 +11,22 @@
     <!-- Header with Navigation -->
     <header class="header">
         <div class="container">
-            <div class="logo">
-                <h1>Kitt Psychological Services</h1>
-                <p class="tagline">Nurturing Growth • Inspiring Healing</p>
+            <div class="header-top">
+                <div class="logo">
+                    <h1>Kitt Psychological Services</h1>
+                    <p class="tagline">Nurturing Growth • Inspiring Healing</p>
+                </div>
+                <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
+                    <svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display: none;">
+                        <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
             </div>
             <nav class="nav">
-                <ul class="nav-menu">
+                <ul class="nav-menu" id="nav-menu">
                     <li><a href="#home" class="nav-link">Home</a></li>
                     <li><a href="#services" class="nav-link">Our Services</a></li>
                     <li><a href="#about" class="nav-link">About</a></li>
