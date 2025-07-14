@@ -628,6 +628,15 @@ section {
 
 /* Responsive Design */
 @media (max-width: 1120px) {
+    .team-member.featured {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .member-content {
+        text-align: center;
+    }
+    
     .header {
         position: static;
         box-shadow: none;
